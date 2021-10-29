@@ -78,16 +78,16 @@ public class Calculator {
                             break;
 
                         case "+", "-", "*", "/":
-                            if(Objects.equals(intermediateResult, "")){
+//                            if(Objects.equals(intermediateResult, "")){
                                 operation = buttonText;
                                 intermediateResult = currentText;
                                 intermediateResult = intermediateResult + buttonText;
                                 currentText = "0";
                                 intermediatText.set("");
                                 break;
-                            } else {
-                                resalt = Integer.parseInt(intermediateResult);
-                            }
+//                            } else {
+//                                resalt = Integer.parseInt(intermediateResult);
+//                            }
 
                         case "=":
                             int inermediantInt = Integer.parseInt(intermediateResult);
