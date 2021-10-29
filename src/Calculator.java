@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class Calculator {
     private static JTextField inputArea;
@@ -43,7 +45,7 @@ public class Calculator {
     }
 
     private static void initInputPanel(JPanel panel) {
-        inputArea = new JTextField("0");
+        inputArea = new JTextField(String.valueOf("0"));
         Font bigFontTR = new Font("Arial", Font.BOLD, 20);
         inputArea.setFont(bigFontTR);
         inputArea.setPreferredSize(new Dimension(380, 45));
@@ -52,6 +54,7 @@ public class Calculator {
 
 
     private static void initButtonPanel(JPanel panel) {
+        AtomicReference<String> intermediatText = new AtomicReference<>("");
         String[][] button = {
                 {"7", "8", "9", "<<<"},
                 {"4", "5", "6", "+"},
@@ -67,7 +70,7 @@ public class Calculator {
                     String buttonText = actionEvents.getActionCommand();
                     String currentText = inputArea.getText();
                     String intermediateResult = resaltArea.getText();
-                    String operation = inputArea.getText();
+                    String operation = inputArea.getText();;
                     int resalt;
                     switch (buttonText) {
                         case "<<<":
@@ -75,38 +78,43 @@ public class Calculator {
                             break;
 
                         case "+", "-", "*", "/":
-                            operation = buttonText;
-                            intermediateResult = currentText;
-                            intermediateResult = intermediateResult + buttonText;
-                            currentText = "0";
-                            break;
+                            if(Objects.equals(intermediateResult, "")){
+                                operation = buttonText;
+                                intermediateResult = currentText;
+                                intermediateResult = intermediateResult + buttonText;
+                                currentText = "0";
+                                intermediatText.set("");
+                                break;
+                            } else {
+                                resalt = Integer.parseInt(intermediateResult);
+                            }
+
                         case "=":
-                            int inermediantInt = Integer.valueOf(intermediateResult);
-                            int inermediantInt1 = Integer.valueOf(currentText);
+                            int inermediantInt = Integer.parseInt(intermediateResult);
+                            int inermediantInt1 = Integer.parseInt(currentText);
                             switch (operation) {
-                                case "+":
+                                case "+" -> {
                                     resalt = inermediantInt + inermediantInt1;
                                     currentText = Integer.toString(resalt);
-                                    break;
-                                case "-":
+                                }
+                                case "-" -> {
                                     resalt = inermediantInt - inermediantInt1;
                                     currentText = Integer.toString(resalt);
-                                    break;
-                                case "*":
+                                }
+                                case "*" -> {
                                     resalt = inermediantInt * inermediantInt1;
                                     currentText = Integer.toString(resalt);
-                                    break;
-                                case "/":
+                                }
+                                case "/" -> {
                                     resalt = inermediantInt / inermediantInt1;
                                     currentText = Integer.toString(resalt);
-                                    break;
-
+                                }
                             }
                             break;
                         case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9":
-                            currentText = "";
-                            currentText= currentText + buttonText;
-
+                            currentText = intermediatText.get();
+                            currentText += buttonText;
+                            intermediatText.set(currentText);
                             break;
                     }
                     resaltArea.setText(intermediateResult);
