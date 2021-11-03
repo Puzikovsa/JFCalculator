@@ -51,7 +51,7 @@ public class Calculator {
         panel.add(resultArea);
     }
 
-    private static void initOperationPanel(JPanel panel){
+    private static void initOperationPanel(JPanel panel) {
         Font operationFont = new Font(Font.SERIF, Font.PLAIN, 20);
         operationArea.setFont(operationFont);
         operationArea.setPreferredSize(new Dimension(350, 40));
@@ -94,25 +94,27 @@ public class Calculator {
                     int result;
                     switch (buttonText) {
                         case "<<<":
-                            if(currentText.length() > 1 ) {
+                            if (currentText.length() > 1) {
                                 currentText = currentText.substring(0, currentText.length() - 1);
-//                                operationArea.setText(operation);
-                            }else currentText = "0";
-                            break;
+                                intermediatText.set("");
+                                break;
+                            } else {
+                                currentText = "0";
+                                intermediatText.set("");
+                                break;
+                            }
 
                         case "+", "-", "*", "/":
-                            if(intermediateResult.equals("")){
-                                operation = buttonText;
-                                operationArea.setText(operation);
+                            if (intermediateResult.equals("")) {
+                                operationArea.setText(buttonText);
                                 intermediateResultBeforEvents = currentText;
                                 intermediateResult = intermediateResultBeforEvents;
                                 currentText = "0";
                                 intermediatText.set("");
                                 break;
                             } else {
-                                    if(buttonText.equals("+")){
-                                    operation = buttonText;
-                                    operationArea.setText(operation);
+                                if (buttonText.equals("+")) {
+                                    operation = operationArea.getText();
                                     inermedianteRezaltAfterEvents = currentText;
                                     intermediateResultBeforEvents = intermediateResult;
                                     after = Integer.parseInt(inermedianteRezaltAfterEvents);
@@ -120,48 +122,49 @@ public class Calculator {
                                     result = after + before;
                                     resultOperation = String.valueOf(result);
                                     intermediateResult = resultOperation;
+                                    operationArea.setText(operation);
                                     currentText = "0";
                                     intermediatText.set("");
                                     break;
                                 }
-                                    if(buttonText.equals("-")){
-                                    operation = buttonText;
-                                    operationArea.setText(operation);
+                                if (buttonText.equals("-")) {
+
                                     inermedianteRezaltAfterEvents = currentText;
                                     intermediateResultBeforEvents = intermediateResult;
                                     after = Integer.parseInt(inermedianteRezaltAfterEvents);
                                     before = Integer.parseInt(intermediateResultBeforEvents);
-                                    result = after - before;
+                                    result = before - after;
                                     resultOperation = String.valueOf(result);
                                     intermediateResult = resultOperation;
+                                    operationArea.setText(operation);
                                     currentText = "0";
                                     intermediatText.set("");
                                     break;
                                 }
-                                    if(buttonText.equals("*")){
-                                    operation = buttonText;
-                                    operationArea.setText(operation);
+                                if (buttonText.equals("*")) {
+
                                     inermedianteRezaltAfterEvents = currentText;
                                     intermediateResultBeforEvents = intermediateResult;
                                     after = Integer.parseInt(inermedianteRezaltAfterEvents);
                                     before = Integer.parseInt(intermediateResultBeforEvents);
-                                    result = after * before;
+                                    result = before * after;
                                     resultOperation = String.valueOf(result);
                                     intermediateResult = resultOperation;
+                                    operationArea.setText(operation);
                                     currentText = "0";
                                     intermediatText.set("");
                                     break;
                                 }
-                                    if(buttonText.equals("/")){
-                                    operation = buttonText;
-                                    operationArea.setText(operation);
+                                if (buttonText.equals("/")) {
+
                                     inermedianteRezaltAfterEvents = currentText;
                                     intermediateResultBeforEvents = intermediateResult;
                                     after = Integer.parseInt(inermedianteRezaltAfterEvents);
                                     before = Integer.parseInt(intermediateResultBeforEvents);
-                                    result = after / before;
+                                    result = before / after;
                                     resultOperation = String.valueOf(result);
                                     intermediateResult = resultOperation;
+                                    operationArea.setText(operation);
                                     currentText = "0";
                                     intermediatText.set("");
                                     break;
