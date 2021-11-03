@@ -94,8 +94,10 @@ public class Calculator {
                     int result;
                     switch (buttonText) {
                         case "<<<":
-                            currentText = currentText.substring(0, currentText.length() - 1);
-                            intermediatText.set(currentText);
+                            if(currentText.length() > 1 ) {
+                                currentText = currentText.substring(0, currentText.length() - 1);
+//                                operationArea.setText(operation);
+                            }else currentText = "0";
                             break;
 
                         case "+", "-", "*", "/":
@@ -108,12 +110,56 @@ public class Calculator {
                                 intermediatText.set("");
                                 break;
                             } else {
-                                if(buttonText.equals("+")){
+                                    if(buttonText.equals("+")){
+                                    operation = buttonText;
+                                    operationArea.setText(operation);
                                     inermedianteRezaltAfterEvents = currentText;
                                     intermediateResultBeforEvents = intermediateResult;
                                     after = Integer.parseInt(inermedianteRezaltAfterEvents);
                                     before = Integer.parseInt(intermediateResultBeforEvents);
                                     result = after + before;
+                                    resultOperation = String.valueOf(result);
+                                    intermediateResult = resultOperation;
+                                    currentText = "0";
+                                    intermediatText.set("");
+                                    break;
+                                }
+                                    if(buttonText.equals("-")){
+                                    operation = buttonText;
+                                    operationArea.setText(operation);
+                                    inermedianteRezaltAfterEvents = currentText;
+                                    intermediateResultBeforEvents = intermediateResult;
+                                    after = Integer.parseInt(inermedianteRezaltAfterEvents);
+                                    before = Integer.parseInt(intermediateResultBeforEvents);
+                                    result = after - before;
+                                    resultOperation = String.valueOf(result);
+                                    intermediateResult = resultOperation;
+                                    currentText = "0";
+                                    intermediatText.set("");
+                                    break;
+                                }
+                                    if(buttonText.equals("*")){
+                                    operation = buttonText;
+                                    operationArea.setText(operation);
+                                    inermedianteRezaltAfterEvents = currentText;
+                                    intermediateResultBeforEvents = intermediateResult;
+                                    after = Integer.parseInt(inermedianteRezaltAfterEvents);
+                                    before = Integer.parseInt(intermediateResultBeforEvents);
+                                    result = after * before;
+                                    resultOperation = String.valueOf(result);
+                                    intermediateResult = resultOperation;
+                                    currentText = "0";
+                                    intermediatText.set("");
+                                    break;
+                                }
+                                    if(buttonText.equals("/")){
+                                    operation = buttonText;
+                                    operationArea.setText(operation);
+                                    inermedianteRezaltAfterEvents = currentText;
+                                    intermediateResultBeforEvents = intermediateResult;
+                                    after = Integer.parseInt(inermedianteRezaltAfterEvents);
+                                    before = Integer.parseInt(intermediateResultBeforEvents);
+                                    result = after / before;
                                     resultOperation = String.valueOf(result);
                                     intermediateResult = resultOperation;
                                     currentText = "0";
