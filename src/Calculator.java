@@ -45,14 +45,14 @@ public class Calculator {
 
     private static void initResaltPanel(JPanel panel) {
         resultArea = new JTextField();
-        Font resaltFont = new Font(Font.SERIF, Font.PLAIN, 15);
+        Font resaltFont = new Font("Arial", Font.PLAIN, 20);
         resultArea.setFont(resaltFont);
         resultArea.setPreferredSize(new Dimension(350, 40));
         panel.add(resultArea);
     }
 
     private static void initOperationPanel(JPanel panel){
-        Font operationFont = new Font(Font.SERIF, Font.PLAIN, 15);
+        Font operationFont = new Font(Font.SERIF, Font.PLAIN, 20);
         operationArea.setFont(operationFont);
         operationArea.setPreferredSize(new Dimension(350, 40));
         panel.add(operationArea);
